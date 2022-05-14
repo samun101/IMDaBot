@@ -30,6 +30,21 @@ class TChat(commands.Cog):
             print("image download failed")
         await ctx.send(ret)
 
+    def proName(self,data):
+        name = data.data['name'].replace('\n', "").split(" ")
+        i = 0
+        ret =''
+        while i < 10 and i < len(name):
+            if not name[i] == "" and not name[i].isnumeric():
+                ret = ret+name[i] +" "
+            i += 1
+        ret = ret + " *as* "
+        if(str(data.currentRole) != ""):
+            ret = ret+str(data.currentRole)
+        else:
+            ret =  ret+"unknown"
+        return ret + '\n'
+
     @commands.command(name = "cast", usage = "(movie name)", help = "List the cast of a movie in credits order")
     async def cast(self,ctx, *, name):
         movie = self.ia.search_movie(name)[0].movieID
@@ -40,9 +55,8 @@ class TChat(commands.Cog):
         #await ctx.send(name+ " cast:")
         i = 0
         base = 10
-
         while i<base and i <len(data['cast']):
-            ret = ret+str(data['cast'][i]) + " *as* " + str(data['cast'][i].currentRole)+'\n'
+            ret = ret + self.proName(data['cast'][i])
             #await ctx.send(data['cast'][i])
             i+=1
 
@@ -66,7 +80,7 @@ class TChat(commands.Cog):
                 base = base+5
                 ret =""
                 while i < base and i < len(data['cast']):
-                    ret = ret+str(data['cast'][i]) + " *as* " + str(data['cast'][i].currentRole)+'\n'
+                    ret = ret + self.proName(data['cast'][i])
                     #await ctx.send(data['cast'][i])
                     i += 1
                 msg = await ctx.send(ret)
