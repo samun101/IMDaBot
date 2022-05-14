@@ -72,7 +72,6 @@ class Act(commands.Cog):
         aid = self.ia.search_person(name)[0].personID
         print("person ID recieved")
         person = self.ia.get_person(aid)
-
         film = person.get("filmography").get("actor")
 
         ret = ""

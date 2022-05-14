@@ -1,5 +1,4 @@
 import asyncio
-
 import discord
 from discord.ext import commands
 from imdb import Cinemagoer
@@ -91,7 +90,7 @@ class TChat(commands.Cog):
                       usage="(movie name, role)",
                       help = "separate role and movie with a comma followed by a space\n"
                              "lists the credits of a given role from a specific movie\n"
-                             "Role options:\n"
+                             "Role options include:\n"
                              "Director\n"
                              "Writer\n"
                              "Producer\n"
@@ -109,7 +108,7 @@ class TChat(commands.Cog):
                              "Casting Department\n"
                              "Editorial Department\n"
                              "Music Department\n"
-                             "Script Department"
+                             "Script Department\n"
                              "Miscellaneous Crew\n"
                              "Thanks")
     async def crew(self,ctx,*, req):
